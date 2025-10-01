@@ -41,20 +41,6 @@
   </style>
 </head>
 <body>
-<script>
-if (window.Telegram?.WebApp) {
-  // Сообщаем Telegram, что Web App готов
-  window.Telegram.WebApp.ready();
-
-  // Можно получать данные пользователя
-  const user = window.Telegram.WebApp.initDataUnsafe.user;
-  console.log("Пользователь Telegram:", user.first_name, user.id);
-
-  // Можно управлять кнопкой “Закрыть”
-  window.Telegram.WebApp.MainButton.text = "Закрыть";
-  window.Telegram.WebApp.MainButton.show();
-}
-</script>
   <div id="pdf-content">
     <h1>Пример PDF</h1>
     <p>Это текст, который будет сгенерирован в PDF. Вы можете менять шаблон по своему усмотрению.</p>
