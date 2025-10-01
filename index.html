@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Генерация PDF с помощью jsPDF</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f0f0f0;
+    }
+    #pdf-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      max-width: 600px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #555;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="pdf-content">
+    <h1>Пример PDF</h1>
+    <p>Это текст, который будет сгенерирован в PDF. Вы можете менять шаблон по своему усмотрению.</p>
+    <p>Добавьте больше элементов HTML, таблицы, изображения и они тоже попадут в PDF.</p>
+  </div>
+
+  <button id="download">Скачать PDF</button>
+
+  <!-- Подключаем jsPDF и html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    const { jsPDF } = window.jspdf;
+
+    document.getElementById('download').addEventListener('click', async () => {
+      const content = document.getElementById('pdf-content');
+
+      // Используем html2canvas для рендеринга HTML в изображение
+      const canvas = await html2canvas(content, { scale: 2 });
+      const imgData = canvas.toDataURL('image/png');
+
+      // Создаем jsPDF документ
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'pt',
+        format: 'a4'
+      });
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      // Рассчитываем размеры изображения для PDF
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pageWidth - 40; // отступы по 20px
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, 'PNG', 20, 20, pdfWidth, pdfHeight);
+      pdf.save('document.pdf');
+    });
+  </script>
+</body>
+</html>
