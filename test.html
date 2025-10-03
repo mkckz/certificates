@@ -57,7 +57,7 @@
     box-sizing: border-box;
   }
 
-  .form-container input[type="submit"] {
+  .button {
     background-color: #ff69b4;
     color: #fff;
     border: none;
@@ -78,7 +78,7 @@
 </style>
 </head>
 <body>
-dddd
+
 <div class="form-container">
   <img src="logobp.png">
 
@@ -131,7 +131,7 @@ MARY KAY командасы</strong>
       <option value="ru">Русский</option>
       <option value="en">Қазақ тілі</option>
     </select>
-    <input type="submit" value="Отправить" id="make">
+    <button class="button" type="button" value="Отправить" id="make">Отправить</button>
   </form>
 </div>
 
@@ -140,19 +140,19 @@ MARY KAY командасы</strong>
   const formTitle = document.getElementById('form-title');
   const formText = document.getElementById('form-text');
   const inputText = document.getElementById('input-text');
-  const submitBtn = document.getElementById('submit-btn');
+  const submitBtn = document.getElementById('make');
 
   langSelect.addEventListener('change', () => {
     if (langSelect.value === 'ru') {
       formTitle.innerHTML = document.querySelector('#lang-ru h2').innerHTML;
       formText.innerHTML  = document.querySelector('#lang-ru p').innerHTML;
       inputText.placeholder = "Введите Фамилию, Имя, Отчество";
-      submitBtn.value = "Скачать";
+      submitBtn.innerHTML = "Скачать";
     } else if (langSelect.value === 'en') {
       formTitle.innerHTML = document.querySelector('#lang-en h2').innerHTML;
       formText.innerHTML  = document.querySelector('#lang-en p').innerHTML;
       inputText.placeholder = "Тегіңіз бен аты-жөніңізді енгізіңіз";
-      submitBtn.value = "Жүктеу";
+      submitBtn.innerHTML = "Жүктеу";
     }
   });
 </script>
