@@ -1,86 +1,110 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Генерация PDF с помощью jsPDF</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f0f0f0;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Розовая форма</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* Общий фон страницы */
+  body {
+    margin: 0;
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #ffc0cb; /* светло-розовый фон страницы */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* Форма */
+  .form-container {
+    background-color: #ffb6c1; /* чуть темнее розовый */
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .form-container img {
+    width: 250px;
+    margin-bottom: 20px;
+  }
+
+  .form-container h2 {
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 28px;
+  }
+
+  .form-container p {
+    margin-bottom: 25px;
+    color: #fff;
+    font-size: 18px;
+  }
+
+  .form-container input[type="text"],
+  .form-container select {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  .form-container input[type="submit"] {
+    background-color: #ff69b4; /* ярко-розовая кнопка */
+    color: #fff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+  }
+
+  .form-container input[type="submit"]:hover {
+    background-color: #ff1493; /* эффект при наведении */
+  }
+
+  /* Адаптивность */
+  @media (max-width: 450px) {
+    .form-container {
+      padding: 30px 20px;
     }
-    #pdf-content {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-      max-width: 600px;
-      margin-bottom: 20px;
+    .form-container h2 {
+      font-size: 24px;
     }
-    h1 {
-      color: #333;
-    }
-    p {
+    .form-container p {
       font-size: 16px;
-      line-height: 1.5;
-      color: #555;
     }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      background-color: #007BFF;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
+    .form-container img {
+      width: 200px;
     }
-    button:hover {
-      background-color: #0056b3;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <div id="pdf-content">
-    <h1>Пример PDF</h1>
-    <p>Это текст, который будет сгенерирован в PDF. Вы можете менять шаблон по своему усмотрению.</p>
-    <p>Добавьте больше элементов HTML, таблицы, изображения и они тоже попадут в PDF.</p>
-  </div>
 
-  <button id="download">Скачать PDF</button>
+<div class="form-container">
+  <img src="logop.png">
+  <h2>Форма обратной связи</h2>
+  <p>Пожалуйста, заполните все поля:</p>
+  <form>
+    <input type="text" placeholder="Введите текст" required>
+    <select required>
+      <option value="">Выберите язык</option>
+      <option value="ru">Русский</option>
+      <option value="en">Английский</option>
+    </select>
+    <input type="submit" value="Отправить">
+  </form>
+</div>
 
-  <!-- Подключаем jsPDF и html2canvas -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  
-  <script>
-    const { jsPDF } = window.jspdf;
-
-    document.getElementById('download').addEventListener('click', async () => {
-      const content = document.getElementById('pdf-content');
-
-      // Используем html2canvas для рендеринга HTML в изображение
-      const canvas = await html2canvas(content, { scale: 2 });
-      const imgData = canvas.toDataURL('image/png');
-
-      // Создаем jsPDF документ
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'pt',
-        format: 'a4'
-      });
-
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
-
-      // Рассчитываем размеры изображения для PDF
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pageWidth - 40; // отступы по 20px
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-      pdf.addImage(imgData, 'PNG', 20, 20, pdfWidth, pdfHeight);
-      pdf.save('document.pdf');
-    });
-  </script>
 </body>
 </html>
