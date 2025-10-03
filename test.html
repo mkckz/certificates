@@ -189,7 +189,7 @@ MARY KAY командасы</strong>
       const img = await loadImage(bgUrl);
 
       doc.addImage(img, "JPEG", 0, 0, pageWidth, pageHeight);
-
+	  await loadFontFromUrl(doc, "https://mkckz.github.io/certificates/NotoSans-Regular.ttf", "CustomFont");
       // Текст по центру
       doc.setFontSize(32);
       doc.setTextColor(255, 255, 255);
@@ -223,6 +223,26 @@ MARY KAY командасы</strong>
         img.src = url;
       });
     }
+	
+	function arrayBufferToBase64(buffer) {
+      let binary = '';
+      const bytes = new Uint8Array(buffer);
+      const len = bytes.byteLength;
+      for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return btoa(binary);
+    }
+
+    // Загрузка шрифта по URL
+    async function loadFontFromUrl(doc, url, fontName) {
+      const res = await fetch(url);
+      const fontBuffer = await res.arrayBuffer();
+      const fontBase64 = arrayBufferToBase64(fontBuffer);
+      doc.addFileToVFS(`${fontName}.ttf`, fontBase64);
+      doc.addFont(`${fontName}.ttf`, fontName, "normal");
+      doc.setFont(fontName, "normal");
+    }	
   </script>
 </body>
 </html>
