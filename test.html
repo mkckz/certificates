@@ -1,23 +1,162 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>jsPDF с вводом текста</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Скачать сертификат</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #ffc0cb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .form-container {
+    background-color: #ffb6c1;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .form-container img {
+    width: 450px;
+    margin-bottom: 20px;
+  }
+
+  .form-container h2 {
+    margin-bottom: 20px;
+    color: #ff69b4;
+    font-size: 28px;
+  }
+
+  .form-container p {
+    margin-bottom: 25px;
+    color: #231F20;
+    font-size: 18px;
+	text-align:justify;
+  }
+
+  .form-container input[type="text"],
+  .form-container select {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  .form-container input[type="submit"] {
+    background-color: #ff69b4;
+    color: #fff;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+  }
+
+  .form-container input[type="submit"]:hover {
+    background-color: #ff1493;
+  }
+
+  .hidden-text {
+    display: none;
+  }
+</style>
 </head>
 <body>
-  <label for="lang">Выберите язык:</label>
-  <select id="lang">
-    <option value="en">English</option>
-    <option value="ru">Русский</option>
-  </select>
-  <br><br>
-  <label for="input-text">Введите текст для PDF:</label>
-  <input type="text" id="input-text" placeholder="Введите текст..." />
-  <br><br>
-  <button id="make">Сгенерировать PDF</button>
+dddd
+<div class="form-container">
+  <img src="logobp.png">
 
-  <script>
+  <!-- основные блоки -->
+  <h2 id="form-title">Уважаемый участник Business Seminar - 2025! 🎉</h2>
+  <p id="form-text">Мы рады поздравить вас с успешным участием в нашей онлайн-конференции! 🌟 <br>
+Вы стали частью масштабного события, где обменивались опытом, знаниями и вдохновением с профессионалами мира Mary Kay. <br>
+Чтобы получить ваш <strong>именной сертификат</strong>, просим вас: <br>
+1. Указать свои <strong>ФИО</strong> (Фамилию, Имя, Отчество). <br>
+2. Нажать на кнопку <strong>"Скачать"</strong>. <br>
+Ваш сертификат — это не только подтверждение вашего участия, но и символ вашего вклада в динамичное бизнес-сообщество! 📜 <br>
+Спасибо, что были с нами! Надеемся видеть вас на следующих мероприятиях. 🚀 <br>
+<strong>С уважением, <br>
+Команда MARY KAY Kazakhstan</strong></p>
+
+  <!-- скрытые тексты -->
+  <div id="lang-ru" class="hidden-text">
+    <h2>Уважаемый участник Business Seminar - 2025! 🎉</h2>
+    <p>Мы рады поздравить вас с успешным участием в нашей онлайн-конференции! 🌟 <br>
+Вы стали частью масштабного события, где обменивались опытом, знаниями и вдохновением с профессионалами мира Mary Kay. <br>
+Чтобы получить ваш <strong>именной сертификат</strong>, просим вас: <br>
+1. Указать свои <strong>ФИО</strong> (Фамилия, Имя, Отчество). <br>
+2. Выбрать <strong>язык сертификата</strong>. <br>
+3. Нажать на кнопку <strong>"Скачать"</strong>. <br>
+Ваш сертификат — это не только подтверждение вашего участия, но и символ вашего вклада в динамичное бизнес-сообщество! 📜 <br>
+Спасибо, что были с нами! Надеемся видеть вас на следующих мероприятиях. 🚀 <br>
+<strong>С уважением, <br>
+Команда MARY KAY Kazakhstan</strong>
+</p>
+  </div>
+
+  <div id="lang-en" class="hidden-text">
+    <h2>Құрметті Business Seminar - 2025 қатысушысы! 🎉</h2>
+    <p>Онлайн-конференцияға сәтті қатысуыңызбен шын жүректен құттықтаймыз! 🌟<br>
+Сіз Mary Kay әлемінің кәсіби мамандарымен тәжірибе, білім және шабыт алмасқан ауқымды шараның бір бөлігі болдыңыз.<br>
+<strong>Атыңыз жазылған сертификатты</strong> алу үшін:<br>
+1. Өзіңіздің Т.А.Ә. (Тегі, Аты, Әкесінің аты) көрсетіңіз.<br>
+2. <strong>Сертификат тілін</strong> таңдаңыз.<br>
+3. "Жүктеу" батырмасын басыңыз.<br>
+Сертификат — бұл сіздің қатысуыңызды растайтын ғана емес, сонымен қатар белсенді бизнес-қауымдастыққа қосқан үлесіңіздің белгісі! 📜<br>
+Бізбен бірге болғаныңызға рахмет! Келесі іс-шараларда кездескенше! 🚀<br>
+<strong>Құрметпен,<br>
+MARY KAY командасы</strong>
+</p>
+  </div>
+
+  <form>
+    <input type="text" placeholder="Введите Фамилию, Имя, Отчество" required id="input-text">
+    <select id="lang" required>
+      <option value="ru">Русский</option>
+      <option value="en">Қазақ тілі</option>
+    </select>
+    <input type="submit" value="Отправить" id="make">
+  </form>
+</div>
+
+<script>
+  const langSelect = document.getElementById('lang');
+  const formTitle = document.getElementById('form-title');
+  const formText = document.getElementById('form-text');
+  const inputText = document.getElementById('input-text');
+  const submitBtn = document.getElementById('submit-btn');
+
+  langSelect.addEventListener('change', () => {
+    if (langSelect.value === 'ru') {
+      formTitle.innerHTML = document.querySelector('#lang-ru h2').innerHTML;
+      formText.innerHTML  = document.querySelector('#lang-ru p').innerHTML;
+      inputText.placeholder = "Введите Фамилию, Имя, Отчество";
+      submitBtn.value = "Скачать";
+    } else if (langSelect.value === 'en') {
+      formTitle.innerHTML = document.querySelector('#lang-en h2').innerHTML;
+      formText.innerHTML  = document.querySelector('#lang-en p').innerHTML;
+      inputText.placeholder = "Тегіңіз бен аты-жөніңізді енгізіңіз";
+      submitBtn.value = "Жүктеу";
+    }
+  });
+</script>
+<script>
     document.getElementById("make").addEventListener("click", async () => {
       const { jsPDF } = window.jspdf;
       const lang = document.getElementById("lang").value;
