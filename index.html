@@ -8,14 +8,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
   body {
-    margin: 0;
-    font-family: 'Noto Sans', sans-serif;
-    background-color: #ffc0cb;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+  margin: 20px;
+  font-family: 'Noto Sans', sans-serif;
+  background-color: #ffc0cb;
+
+  display: flex;
+  justify-content: center; /* центр по горизонтали */
+  align-items: flex-start; /* верхнее выравнивание по вертикали */
+
+  min-height: 100vh; /* минимальная высота экрана, чтобы была прокрутка при необходимости */
+}
 
   .form-container {
     background-color: #ffb6c1;
@@ -131,7 +133,7 @@ MARY KAY командасы</strong>
       <option value="ru">Русский</option>
       <option value="en">Қазақ тілі</option>
     </select>
-    <button class="button" type="button" value="Отправить" id="make">Отправить</button>
+    <button class="button" type="button" value="Скачать" id="make">Скачать</button>
   </form>
 </div>
 
