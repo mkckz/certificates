@@ -235,15 +235,15 @@
 	  await loadFontFromUrl(doc, "https://mkckz.github.io/certificates/NotoSans-Regular.ttf", "CustomFont");
 	  //await loadFontFromUrl(doc, "https://mkckz.github.io/certificates/MaryKayScriptCyrillicReg.otf", "CustomFont");
       // Текст по центру
-      doc.setFontSize(60);
+      doc.setFontSize(80);
       doc.setTextColor(255, 255, 255);
 
       const textWidth = doc.getTextWidth(userText);
 
       doc.text(
         userText,
-        (pageWidth - textWidth) / 2,
-        pageHeight / 2,
+        100,
+        100,
         { baseline: "middle" }
       );
 
