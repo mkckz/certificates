@@ -232,10 +232,11 @@
       const img = await loadImage(bgUrl);
 
       doc.addImage(img, "JPEG", 0, 0, pageWidth, pageHeight);
-	  await loadFontFromUrl(doc, "https://mkckz.github.io/certificates/NotoSans-Regular.ttf", "CustomFont");
+	  //await loadFontFromUrl(doc, "https://mkckz.github.io/certificates/NotoSans-Regular.ttf", "CustomFont");
+		await loadFontFromUrl(doc, "https://mkckz.github.io/certificates/MaryKayScriptCyrillicReg.otf", "CustomFont");
       // Текст по центру
-      doc.setFontSize(48);
-      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(60);
+      doc.setTextColor(255, 255, 255);
 
       const textWidth = doc.getTextWidth(userText);
 
